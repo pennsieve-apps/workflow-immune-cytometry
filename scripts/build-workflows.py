@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """
 Writes the two workflow definitions (workflow/*.json, the body of
-POST /compute/workflows/definitions) from the step lists below. Each step's
+POST /compute/workflows/definitions) from the step lists below. Add
+"organizationId": "N:organization:..." to the body when posting: without it
+the workflow belongs to no workspace and the Workflow Library doesn't list it
+(an organization_id query parameter is not enough). Each step's
 cpu/memory comes from its app's app.yml runtime (the sibling repo
 ../processor-<app>), so the definitions follow the apps.
 
