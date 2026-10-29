@@ -21,7 +21,8 @@ build() { # build <app>
   docker build --platform "$PLATFORM" -q -t "$PREFIX/$1" "$ROOT/../processor-$1" >/dev/null
   echo "built $PREFIX/$1"
 }
-link() { # link <step> <input> <source-step> <source-output>   (subfolder placement)
+link() { # link <step> <input> <source-step> <source-output|.>   (subfolder placement)
+  # "." = an app with one output, which is the whole OUTPUT_DIR
   local dst="$WORK/$1/input/$2" src="$WORK/$3/output/$4"
   mkdir -p "$dst"
   [ -d "$src" ] && cp -R "$src/." "$dst/" || echo "   ($3 has no $4)"
@@ -66,7 +67,7 @@ if [ "$WHICH" = a ] || [ "$WHICH" = both ]; then
   run diffcyt diffcyt CONDITION_COLUMN=condition REFERENCE_LEVEL=unstimulated BLOCK_COLUMN=batch
   fresh report-a
   link report-a metadata prep metadata; link report-a qc qc qc; link report-a doublets doublets qc
-  link report-a clusters clusters clusters; link report-a embedding umap embedding
+  link report-a clusters clusters clusters; link report-a embedding umap .
   link report-a da diffcyt da; link report-a ds diffcyt ds
   run report-a cytometry-report REPORT_TITLE="Immune Profiling & Differential Abundance"
   echo "Report A: $WORK/report-a/output/report/index.html"
@@ -85,7 +86,7 @@ if [ "$WHICH" = b ] || [ "$WHICH" = both ]; then
   done
   fresh report-b
   link report-b metadata prep metadata; link report-b qc qc qc
-  for s in assess-raw assess-cytonorm assess-cycombine; do link report-b assessment "$s" assessment; done
+  for s in assess-raw assess-cytonorm assess-cycombine; do link report-b assessment "$s" .; done
   for m in cytonorm cycombine; do link report-b normalization "$m" qc; done
   run report-b cytometry-report REPORT_TITLE="Multi-batch Harmonization & QC"
   echo "Report B: $WORK/report-b/output/report/index.html"
