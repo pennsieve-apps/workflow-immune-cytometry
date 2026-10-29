@@ -53,8 +53,8 @@ carried through unchanged (e.g. `control`, `donor`, `timepoint`).
 
 ### `panel.csv` (in the `metadata` port)
 
-One row per channel kept: `channel` (`$PnN`), `marker` (`$PnS`, or the channel name
-when empty), `type` (`marker` | `scatter` | `time` | `other`), `cofactor` (empty unless
+One row per channel kept: `channel` (`$PnN`), `marker` (`$PnS` without a mass tag, so a
+CyTOF `154Sm_CD3` is `CD3`, or the channel name when empty), `type` (`marker` | `scatter` | `time` | `other`), `cofactor` (empty unless
 transformed), `clustering` (`true`/`false`: use for clustering; default true for
 lineage markers, `PANEL_OVERRIDES` can change it), `state` (`true`/`false`: a functional
 / state marker for differential-state tests).

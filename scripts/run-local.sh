@@ -54,7 +54,10 @@ run prep fcs-prep MAX_EVENTS_PER_SAMPLE="${MAX_EVENTS_PER_SAMPLE:-0}"
 fresh qc; link qc fcs prep fcs; link qc metadata prep metadata
 run qc peacoqc
 
-REF=(REFERENCE_COLUMN=control REFERENCE_VALUES=tcu1)
+# Study-specific parameters (defaults: the spectral demo); override for other data, e.g. the
+# CyTOF demo: REF_COLUMN=control REF_VALUES=himc CONDITION_COLUMN=timepoint REFERENCE_LEVEL=pre_tx
+# BLOCK_COLUMN=donor COVARIATE_COLUMN=group.
+REF=(REFERENCE_COLUMN="${REF_COLUMN:-control}" REFERENCE_VALUES="${REF_VALUES:-tcu1}")
 
 if [ "$WHICH" = a ] || [ "$WHICH" = both ]; then
   fresh doublets; link doublets fcs qc fcs; link doublets metadata prep metadata
@@ -64,7 +67,7 @@ if [ "$WHICH" = a ] || [ "$WHICH" = both ]; then
   fresh umap; link umap cells clusters cells; link umap metadata prep metadata
   run umap cytometry-umap
   fresh diffcyt; link diffcyt clusters clusters clusters; link diffcyt metadata prep metadata
-  run diffcyt diffcyt CONDITION_COLUMN=condition REFERENCE_LEVEL=unstimulated BLOCK_COLUMN=batch
+  run diffcyt diffcyt CONDITION_COLUMN="${CONDITION_COLUMN:-condition}" REFERENCE_LEVEL="${REFERENCE_LEVEL:-unstimulated}" BLOCK_COLUMN="${BLOCK_COLUMN:-batch}"
   fresh report-a
   link report-a metadata prep metadata; link report-a qc qc qc; link report-a doublets doublets qc
   link report-a clusters clusters clusters; link report-a embedding umap .
@@ -79,7 +82,7 @@ if [ "$WHICH" = b ] || [ "$WHICH" = both ]; then
   fresh cytonorm; link cytonorm fcs qc fcs; link cytonorm metadata prep metadata
   run cytonorm cytonorm MODE=controls BATCH_COLUMN=batch "${REF[@]}"
   fresh cycombine; link cycombine fcs qc fcs; link cycombine metadata prep metadata
-  run cycombine cycombine BATCH_COLUMN=batch COVARIATE_COLUMN=condition
+  run cycombine cycombine BATCH_COLUMN=batch COVARIATE_COLUMN="${COVARIATE_COLUMN:-condition}"
   for m in cytonorm cycombine; do
     fresh "assess-$m"; link "assess-$m" fcs "$m" fcs; link "assess-$m" metadata prep metadata
     run "assess-$m" cytometry-batch-assess LABEL="$m" "${REF[@]}"
