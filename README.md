@@ -149,10 +149,11 @@ MAX_EVENTS_PER_SAMPLE=20000 scripts/run-local.sh a data/zenodo-15388817 data/qui
 The script builds each app from the sibling `../processor-*` checkouts. It assembles every step's
 `INPUT_DIR` from the linked outputs, the way a compute node does, and prints where the reports are.
 
-Regenerate the workflow definitions after changing an app's resources:
+Regenerate the workflow definitions after releasing an app or changing its resources (each step
+pins the release tag of its sibling repo's checked-out commit):
 
 ```
-scripts/build-workflows.py --tag v0.1.0
+scripts/build-workflows.py
 ```
 
 ## Citations

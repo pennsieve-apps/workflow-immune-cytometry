@@ -5,11 +5,13 @@ POST /compute/workflows/definitions) from the step lists below. Each step's
 cpu/memory comes from its app's app.yml runtime (the sibling repo
 ../processor-<app>), so the definitions follow the apps.
 
-Usage: scripts/build-workflows.py [--tag v0.1.0]
+Each step pins the release tag of the checked-out commit of its app.
+
+Usage: scripts/build-workflows.py
 """
-import argparse
 import json
 import re
+import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -28,8 +30,24 @@ def runtime(app: str) -> tuple[str, str]:
     return cpu, mem
 
 
-def step(id_, app, col, row, depends, links=(), params=None, tag="v0.1.0"):
+def release_tag(app: str) -> str:
+    """The tag on origin that points at the checked-out commit (local tags can be stale)."""
+    repo = ROOT.parent / f"processor-{app}"
+    head = subprocess.run(["git", "-C", repo, "rev-parse", "HEAD"],
+                          capture_output=True, text=True, check=True).stdout.strip()
+    refs = subprocess.run(["git", "-C", repo, "ls-remote", "--tags", "origin"],
+                          capture_output=True, text=True, check=True).stdout.split("\n")
+    tags = sorted({ref.split("refs/tags/")[1].removesuffix("^{}")
+                   for ref in refs if ref.startswith(head)},
+                  key=lambda t: [int(n) for n in re.findall(r"\d+", t)])
+    if not tags:
+        raise SystemExit(f"processor-{app}: HEAD {head[:7]} has no release tag on origin")
+    return tags[-1]
+
+
+def step(id_, app, col, row, depends, links=(), params=None):
     cpu, mem = runtime(app)
+    tag = release_tag(app)
     node = {
         "id": id_,
         "type": "processor",
@@ -68,7 +86,7 @@ QC = lambda col, row: step("qc", "peacoqc", col, row, ["prep"],
                            [("prep", "fcs", "fcs"), ("prep", "metadata", "metadata")])
 
 
-def profiling(tag):
+def profiling():
     steps = [
         PREP(1, 2),
         QC(2, 2),
@@ -88,8 +106,6 @@ def profiling(tag):
               ("diffcyt", "da", "da"), ("diffcyt", "ds", "ds")],
              {"REPORT_TITLE": "Immune Profiling & Differential Abundance"}),
     ]
-    for s in steps:
-        s["tag"] = tag
     return {
         "name": "Immune Profiling & Differential Abundance",
         "summary": "FCS: QC, doublets, FlowSOM populations, UMAP, diffcyt DA/DS between conditions, report.",
@@ -117,7 +133,7 @@ def profiling(tag):
     }
 
 
-def harmonization(tag):
+def harmonization():
     ref = {"REFERENCE_COLUMN": "control", "REFERENCE_VALUES": "tcu1"}
     steps = [
         PREP(1, 2),
@@ -145,8 +161,6 @@ def harmonization(tag):
               ("cytonorm", "qc", "normalization"), ("cycombine", "qc", "normalization")],
              {"REPORT_TITLE": "Multi-batch Harmonization & QC"}),
     ]
-    for s in steps:
-        s["tag"] = tag
     return {
         "name": "Multi-batch Harmonization & QC",
         "summary": "FCS: QC, batch-effect EMD per marker, CytoNorm vs cyCombine correction, before/after report.",
@@ -170,13 +184,10 @@ def harmonization(tag):
 
 
 def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--tag", default="v0.1.0")
-    tag = ap.parse_args().tag
     out = ROOT / "workflow"
     out.mkdir(exist_ok=True)
-    for name, wf in (("immune-profiling-differential-abundance", profiling(tag)),
-                     ("multi-batch-harmonization-qc", harmonization(tag))):
+    for name, wf in (("immune-profiling-differential-abundance", profiling()),
+                     ("multi-batch-harmonization-qc", harmonization())):
         assert len(wf["summary"].encode()) <= 100, (name, len(wf["summary"].encode()))
         (out / f"{name}.json").write_text(json.dumps(wf, indent=2) + "\n")
         print(f"wrote workflow/{name}.json ({len(wf['processors'])} steps)")
