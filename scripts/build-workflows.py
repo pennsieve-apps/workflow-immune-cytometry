@@ -8,7 +8,7 @@ the workflow belongs to no workspace and the Workflow Library doesn't list it
 cpu/memory comes from its app's app.yml runtime (the sibling repo
 ../processor-<app>), so the definitions follow the apps.
 
-Each step pins the release tag of the checked-out commit of its app.
+Each step pins the newest release tag at or before the checked-out commit of its app.
 
 Usage: scripts/build-workflows.py
 """
@@ -34,18 +34,23 @@ def runtime(app: str) -> tuple[str, str]:
 
 
 def release_tag(app: str) -> str:
-    """The tag on origin that points at the checked-out commit (local tags can be stale)."""
+    """The newest release tag at or before the checked-out commit, after refreshing tags from
+    origin (local tags can be stale). Commits after it (docs, CITATION.cff) are not released yet."""
     repo = ROOT.parent / f"processor-{app}"
-    head = subprocess.run(["git", "-C", repo, "rev-parse", "HEAD"],
-                          capture_output=True, text=True, check=True).stdout.strip()
-    refs = subprocess.run(["git", "-C", repo, "ls-remote", "--tags", "origin"],
-                          capture_output=True, text=True, check=True).stdout.split("\n")
-    tags = sorted({ref.split("refs/tags/")[1].removesuffix("^{}")
-                   for ref in refs if ref.startswith(head)},
-                  key=lambda t: [int(n) for n in re.findall(r"\d+", t)])
-    if not tags:
-        raise SystemExit(f"processor-{app}: HEAD {head[:7]} has no release tag on origin")
-    return tags[-1]
+    git = lambda *a: subprocess.run(["git", "-C", repo, *a], capture_output=True, text=True)
+    git("fetch", "-q", "--tags", "--force", "origin")
+    tag = git("describe", "--tags", "--abbrev=0", "--match", "v*", "HEAD").stdout.strip()
+    if not tag:
+        raise SystemExit(f"processor-{app}: no release tag at or before HEAD")
+    # Several tags can mark one commit (v0.1.0 cut before App Store publishing was on, v0.1.1
+    # re-released to build it); describe prefers annotated ones, but the newest is the deployed one.
+    commit = git("rev-list", "-n1", tag).stdout.strip()
+    same = git("tag", "--points-at", commit, "--list", "v*").stdout.split()
+    tag = max(same, key=lambda t: [int(n) for n in re.findall(r"\d+", t)])
+    ahead = git("rev-list", "--count", f"{tag}..HEAD").stdout.strip()
+    if ahead not in ("", "0"):
+        print(f"note: processor-{app} is {ahead} commit(s) past {tag}; the workflow pins {tag}")
+    return tag
 
 
 def step(id_, app, col, row, depends, links=(), params=None):

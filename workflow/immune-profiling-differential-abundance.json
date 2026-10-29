@@ -18,7 +18,7 @@
       "id": "prep",
       "type": "processor",
       "sourceUrl": "https://github.com/pennsieve-apps/processor-fcs-prep",
-      "tag": "v0.1.1",
+      "tag": "v0.1.3",
       "dependsOn": [
         "fcs"
       ],
@@ -60,7 +60,7 @@
       "id": "doublets",
       "type": "processor",
       "sourceUrl": "https://github.com/pennsieve-apps/processor-cleanet",
-      "tag": "v0.1.0",
+      "tag": "v0.1.1",
       "dependsOn": [
         "qc",
         "prep"
@@ -69,8 +69,8 @@
         "x": 820,
         "y": 300
       },
-      "cpu": "2048",
-      "memory": "8192",
+      "cpu": "4096",
+      "memory": "16384",
       "inputs": [
         {
           "from": "qc",
