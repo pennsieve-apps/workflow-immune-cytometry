@@ -1,0 +1,1066 @@
+cff-version: "1.2.0"
+message: If you use this app, please cite it and the works it builds on, listed under references.
+type: software
+title: Immune Cytometry Workflows
+abstract: 'Two end-to-end workflows for high-dimensional flow, spectral and mass cytometry built from
+  open-source Pennsieve apps: Immune Profiling & Differential Abundance, and Multi-batch Harmonization
+  & QC.'
+authors:
+- name: Pennsieve (University of Pennsylvania)
+repository-code: https://github.com/pennsieve-apps/workflow-immune-cytometry
+license: Apache-2.0
+keywords:
+- cytometry
+- flow-cytometry
+- spectral-flow
+- mass-cytometry
+- fcs
+- immunology
+- workflow
+- batch-correction
+- differential-abundance
+references:
+- type: article
+  title: Deep immune profiling of COVID-19 patients reveals distinct immunotypes with therapeutic implications
+  authors:
+  - family-names: Mathew
+    given-names: Divij
+  - family-names: Giles
+    given-names: Josephine R.
+  - family-names: Baxter
+    given-names: Amy E.
+  - family-names: Oldridge
+    given-names: Derek A.
+  - family-names: Greenplate
+    given-names: Allison R.
+  - family-names: Wu
+    given-names: Jennifer E.
+  - family-names: Alanio
+    given-names: Cécile
+  - family-names: Kuri-Cervantes
+    given-names: Leticia
+  - family-names: Pampena
+    given-names: M. Betina
+  - family-names: D’Andrea
+    given-names: Kurt
+  - family-names: Manne
+    given-names: Sasikanth
+  - family-names: Chen
+    given-names: Zeyu
+  - family-names: Huang
+    given-names: Yinghui Jane
+  - family-names: Reilly
+    given-names: John P.
+  - family-names: Weisman
+    given-names: Ariel R.
+  - family-names: Ittner
+    given-names: Caroline A. G.
+  - family-names: Kuthuru
+    given-names: Oliva
+  - family-names: Dougherty
+    given-names: Jeanette
+  - family-names: Nzingha
+    given-names: Kito
+  - family-names: Han
+    given-names: Nicholas
+  - family-names: Kim
+    given-names: Justin
+  - family-names: Pattekar
+    given-names: Ajinkya
+  - family-names: Goodwin
+    given-names: Eileen C.
+  - family-names: Anderson
+    given-names: Elizabeth M.
+  - family-names: Weirick
+    given-names: Madison E.
+  - family-names: Gouma
+    given-names: Sigrid
+  - family-names: Arevalo
+    given-names: Claudia P.
+  - family-names: Bolton
+    given-names: Marcus J.
+  - family-names: Chen
+    given-names: Fang
+  - family-names: Lacey
+    given-names: Simon F.
+  - family-names: Ramage
+    given-names: Holly
+  - family-names: Cherry
+    given-names: Sara
+  - family-names: Hensley
+    given-names: Scott E.
+  - family-names: Apostolidis
+    given-names: Sokratis A.
+  - family-names: Huang
+    given-names: Alexander C.
+  - family-names: Vella
+    given-names: Laura A.
+  - name: The UPenn COVID Processing Unit
+  - family-names: Betts
+    given-names: Michael R.
+  - family-names: Meyer
+    given-names: Nuala J.
+  - family-names: Wherry
+    given-names: E. John
+  - family-names: Alam
+    given-names: Zahidul
+  - family-names: Addison
+    given-names: Mary M.
+  - family-names: Byrne
+    given-names: Katelyn T.
+  - family-names: Chandra
+    given-names: Aditi
+  - family-names: Descamps
+    given-names: Hélène C.
+  - family-names: Kaminskiy
+    given-names: Yaroslav
+  - family-names: Hamilton
+    given-names: Jacob T.
+  - family-names: Noll
+    given-names: Julia Han
+  - family-names: Omran
+    given-names: Dalia K.
+  - family-names: Perkey
+    given-names: Eric
+  - family-names: Prager
+    given-names: Elizabeth M.
+  - family-names: Pueschl
+    given-names: Dana
+  - family-names: Shah
+    given-names: Jennifer B.
+  - family-names: Shilan
+    given-names: Jake S.
+  - family-names: Vanderbeck
+    given-names: Ashley N.
+  year: 2020
+  journal: Science
+  volume: 369
+  issue: '6508'
+  start: eabc8511
+  doi: 10.1126/science.abc8511
+- type: article
+  title: 'CyTOF workflow: differential discovery in high-throughput high-dimensional cytometry datasets'
+  authors:
+  - family-names: Nowicka
+    given-names: Malgorzata
+  - family-names: Krieg
+    given-names: Carsten
+  - family-names: Crowell
+    given-names: Helena L.
+  - family-names: Weber
+    given-names: Lukas M.
+  - family-names: Hartmann
+    given-names: Felix J.
+  - family-names: Guglietta
+    given-names: Silvia
+  - family-names: Becher
+    given-names: Burkhard
+  - family-names: Levesque
+    given-names: Mitchell P.
+  - family-names: Robinson
+    given-names: Mark D.
+  year: 2017
+  journal: F1000Research
+  volume: 6
+  start: '748'
+  doi: 10.12688/f1000research.11622.3
+- type: article
+  title: Analyzing high-dimensional cytometry data using FlowSOM
+  authors:
+  - family-names: Quintelier
+    given-names: Katrien
+  - family-names: Couckuyt
+    given-names: Artuur
+  - family-names: Emmaneel
+    given-names: Annelies
+  - family-names: Aerts
+    given-names: Joachim
+  - family-names: Saeys
+    given-names: Yvan
+  - family-names: Van Gassen
+    given-names: Sofie
+  year: 2021
+  journal: Nature Protocols
+  volume: 16
+  issue: '8'
+  start: '3775'
+  end: '3801'
+  doi: 10.1038/s41596-021-00550-0
+- type: article
+  title: 'An updated guide for the perplexed: cytometry in the high-dimensional era'
+  authors:
+  - family-names: Liechti
+    given-names: Thomas
+  - family-names: Weber
+    given-names: Lukas M.
+  - family-names: Ashhurst
+    given-names: Thomas M.
+  - family-names: Stanley
+    given-names: Natalie
+  - family-names: Prlic
+    given-names: Martin
+  - family-names: Van Gassen
+    given-names: Sofie
+  - family-names: Mair
+    given-names: Florian
+  year: 2021
+  journal: Nature Immunology
+  volume: 22
+  issue: '10'
+  start: '1190'
+  end: '1197'
+  doi: 10.1038/s41590-021-01006-z
+- type: article
+  title: 'FlowKit: A Python Toolkit for Integrated Manual and Automated Cytometry Analysis Workflows'
+  authors:
+  - family-names: White
+    given-names: Scott
+  - family-names: Quinn
+    given-names: John
+  - family-names: Enzor
+    given-names: Jennifer
+  - family-names: Staats
+    given-names: Janet
+  - family-names: Mosier
+    given-names: Sarah M.
+  - family-names: Almarode
+    given-names: James
+  - family-names: Denny
+    given-names: Thomas N.
+  - family-names: Weinhold
+    given-names: Kent J.
+  - family-names: Ferrari
+    given-names: Guido
+  - family-names: Chan
+    given-names: Cliburn
+  year: 2021
+  journal: Frontiers in Immunology
+  volume: 12
+  start: '768541'
+  doi: 10.3389/fimmu.2021.768541
+- type: article
+  title: 'PeacoQC: Peak-based selection of high quality cytometry data'
+  authors:
+  - family-names: Emmaneel
+    given-names: Annelies
+  - family-names: Quintelier
+    given-names: Katrien
+  - family-names: Sichien
+    given-names: Dorine
+  - family-names: Rybakowska
+    given-names: Paulina
+  - family-names: Marañón
+    given-names: Concepción
+  - family-names: Alarcón-Riquelme
+    given-names: Marta E.
+  - family-names: Van Isterdael
+    given-names: Gert
+  - family-names: Van Gassen
+    given-names: Sofie
+  - family-names: Saeys
+    given-names: Yvan
+  year: 2022
+  journal: Cytometry Part A
+  volume: 101
+  issue: '4'
+  start: '325'
+  end: '338'
+  doi: 10.1002/cyto.a.24501
+- type: article
+  title: 'Cleanet: Robust Doublet Detection in Cytometry Data Based on Protein Expression Patterns'
+  authors:
+  - family-names: Ionita
+    given-names: Matei
+  - family-names: McKeague
+    given-names: Michelle L.
+  - family-names: Painter
+    given-names: Mark M.
+  - family-names: Mathew
+    given-names: Divij
+  - family-names: Pattekar
+    given-names: Ajinkya
+  - family-names: Rezk
+    given-names: Ayman
+  - family-names: Shwetank
+  - family-names: Maseda
+    given-names: Damian
+  - family-names: Wherry
+    given-names: E. John
+  - family-names: Greenplate
+    given-names: Allison R.
+  year: 2025
+  journal: Cytometry Part A
+  volume: 107
+  issue: '11'
+  start: '716'
+  end: '729'
+  doi: 10.1002/cyto.a.24961
+- type: article
+  title: 'FlowSOM: Using self-organizing maps for visualization and interpretation of cytometry data'
+  authors:
+  - family-names: Van Gassen
+    given-names: Sofie
+  - family-names: Callebaut
+    given-names: Britt
+  - family-names: Van Helden
+    given-names: Mary J.
+  - family-names: Lambrecht
+    given-names: Bart N.
+  - family-names: Demeester
+    given-names: Piet
+  - family-names: Dhaene
+    given-names: Tom
+  - family-names: Saeys
+    given-names: Yvan
+  year: 2015
+  journal: Cytometry Part A
+  volume: 87
+  issue: '7'
+  start: '636'
+  end: '645'
+  doi: 10.1002/cyto.a.22625
+- type: article
+  title: Dimensionality reduction for visualizing single-cell data using UMAP
+  authors:
+  - family-names: Becht
+    given-names: Etienne
+  - family-names: McInnes
+    given-names: Leland
+  - family-names: Healy
+    given-names: John
+  - family-names: Dutertre
+    given-names: Charles-Antoine
+  - family-names: Kwok
+    given-names: Immanuel W H
+  - family-names: Ng
+    given-names: Lai Guan
+  - family-names: Ginhoux
+    given-names: Florent
+  - family-names: Newell
+    given-names: Evan W
+  year: 2019
+  journal: Nature Biotechnology
+  volume: 37
+  issue: '1'
+  start: '38'
+  end: '44'
+  doi: 10.1038/nbt.4314
+- type: article
+  title: 'diffcyt: Differential discovery in high-dimensional cytometry via high-resolution clustering'
+  authors:
+  - family-names: Weber
+    given-names: Lukas M.
+  - family-names: Nowicka
+    given-names: Malgorzata
+  - family-names: Soneson
+    given-names: Charlotte
+  - family-names: Robinson
+    given-names: Mark D.
+  year: 2019
+  journal: Communications Biology
+  volume: 2
+  issue: '1'
+  start: '183'
+  doi: 10.1038/s42003-019-0415-5
+- type: article
+  title: 'CytoNorm: A Normalization Algorithm for Cytometry Data'
+  authors:
+  - family-names: Van Gassen
+    given-names: Sofie
+  - family-names: Gaudilliere
+    given-names: Brice
+  - family-names: Angst
+    given-names: Martin S.
+  - family-names: Saeys
+    given-names: Yvan
+  - family-names: Aghaeepour
+    given-names: Nima
+  year: 2020
+  journal: Cytometry Part A
+  volume: 97
+  issue: '3'
+  start: '268'
+  end: '278'
+  doi: 10.1002/cyto.a.23904
+- type: article
+  title: 'CytoNorm 2.0: A flexible normalization framework for cytometry data without requiring dedicated
+    controls'
+  authors:
+  - family-names: Quintelier
+    given-names: Katrien L. A.
+  - family-names: Willemsen
+    given-names: Marcella
+  - family-names: Bosteels
+    given-names: Victor
+  - family-names: Aerts
+    given-names: Joachim G. J. V.
+  - family-names: Saeys
+    given-names: Yvan
+  - family-names: Van Gassen
+    given-names: Sofie
+  year: 2025
+  journal: Cytometry Part A
+  volume: 107
+  issue: '2'
+  start: '69'
+  end: '87'
+  doi: 10.1002/cyto.a.24910
+- type: article
+  title: cyCombine allows for robust integration of single-cell cytometry datasets within and across technologies
+  authors:
+  - family-names: Pedersen
+    given-names: Christina Bligaard
+  - family-names: Dam
+    given-names: Søren Helweg
+  - family-names: Barnkob
+    given-names: Mike Bogetofte
+  - family-names: Leipold
+    given-names: Michael D.
+  - family-names: Purroy
+    given-names: Noelia
+  - family-names: Rassenti
+    given-names: Laura Z.
+  - family-names: Kipps
+    given-names: Thomas J.
+  - family-names: Nguyen
+    given-names: Jennifer
+  - family-names: Lederer
+    given-names: James Arthur
+  - family-names: Gohil
+    given-names: Satyen Harish
+  - family-names: Wu
+    given-names: Catherine J.
+  - family-names: Olsen
+    given-names: Lars Rønn
+  year: 2022
+  journal: Nature Communications
+  volume: 13
+  issue: '1'
+  start: '1698'
+  doi: 10.1038/s41467-022-29383-5
+- type: article
+  title: 'Earth Mover’s Distance (EMD): A True Metric for Comparing Biomarker Expression Levels in Cell
+    Populations'
+  authors:
+  - family-names: Orlova
+    given-names: Darya Y.
+  - family-names: Zimmerman
+    given-names: Noah
+  - family-names: Meehan
+    given-names: Stephen
+  - family-names: Meehan
+    given-names: Connor
+  - family-names: Waters
+    given-names: Jeffrey
+  - family-names: Ghosn
+    given-names: Eliver E. B.
+  - family-names: Filatenkov
+    given-names: Alexander
+  - family-names: Kolyagin
+    given-names: Gleb A.
+  - family-names: Gernez
+    given-names: Yael
+  - family-names: Tsuda
+    given-names: Shanel
+  - family-names: Moore
+    given-names: Wayne
+  - family-names: Moss
+    given-names: Richard B.
+  - family-names: Herzenberg
+    given-names: Leonore A.
+  - family-names: Walther
+    given-names: Guenther
+  year: 2016
+  journal: PLOS ONE
+  volume: 11
+  issue: '3'
+  start: e0151859
+  doi: 10.1371/journal.pone.0151859
+- type: article
+  title: 'CytoBatchFlagR: A Comprehensive Framework to Objectively Assess High-Parameter Cytometry Data
+    for Batch Effects'
+  authors:
+  - family-names: Eswar
+    given-names: Shruti
+  - family-names: Koenig
+    given-names: Zachary T.
+  - family-names: Tursi
+    given-names: Amanda R.
+  - family-names: Cobeña-Reyes
+    given-names: José
+  - family-names: Tilburgs
+    given-names: Tamara
+  - family-names: Andorf
+    given-names: Sandra
+  year: 2026
+  journal: Cytometry Part A
+  volume: 109
+  issue: '4'
+  start: '241'
+  end: '256'
+  doi: 10.1002/cyto.a.70024
+- type: data
+  title: 'CytoBatchFlagR: Spectral flow cytometry dataset'
+  authors:
+  - family-names: Koenig
+    given-names: Zachary
+  - family-names: Andorf
+    given-names: Sandra
+  - family-names: Tilburgs
+    given-names: Tamara
+  - family-names: Eswar
+    given-names: Shruti
+  year: 2025
+  publisher:
+    name: Zenodo
+  doi: 10.5281/zenodo.15388817
+  license: CC-BY-4.0
+- type: article
+  title: Single-Cell Mass Cytometry of Differential Immune and Drug Responses Across a Human Hematopoietic
+    Continuum
+  authors:
+  - family-names: Bendall
+    given-names: Sean C.
+  - family-names: Simonds
+    given-names: Erin F.
+  - family-names: Qiu
+    given-names: Peng
+  - family-names: Amir
+    given-names: El-ad D.
+  - family-names: Krutzik
+    given-names: Peter O.
+  - family-names: Finck
+    given-names: Rachel
+  - family-names: Bruggner
+    given-names: Robert V.
+  - family-names: Melamed
+    given-names: Rachel
+  - family-names: Trejo
+    given-names: Angelica
+  - family-names: Ornatsky
+    given-names: Olga I.
+  - family-names: Balderas
+    given-names: Robert S.
+  - family-names: Plevritis
+    given-names: Sylvia K.
+  - family-names: Sachs
+    given-names: Karen
+  - family-names: Pe’er
+    given-names: Dana
+  - family-names: Tanner
+    given-names: Scott D.
+  - family-names: Nolan
+    given-names: Garry P.
+  year: 2011
+  journal: Science
+  volume: 332
+  issue: '6030'
+  start: '687'
+  end: '696'
+  doi: 10.1126/science.1198704
+- type: article
+  title: 'flowCore: a Bioconductor package for high throughput flow cytometry'
+  authors:
+  - family-names: Hahne
+    given-names: Florian
+  - family-names: LeMeur
+    given-names: Nolwenn
+  - family-names: Brinkman
+    given-names: Ryan R
+  - family-names: Ellis
+    given-names: Byron
+  - family-names: Haaland
+    given-names: Perry
+  - family-names: Sarkar
+    given-names: Deepayan
+  - family-names: Spidlen
+    given-names: Josef
+  - family-names: Strain
+    given-names: Errol
+  - family-names: Gentleman
+    given-names: Robert
+  year: 2009
+  journal: BMC Bioinformatics
+  volume: 10
+  issue: '1'
+  start: '106'
+  doi: 10.1186/1471-2105-10-106
+- type: software
+  title: PeacoQC
+  authors:
+  - family-names: Emmaneel
+    given-names: Annelies
+  year: 2020
+  doi: 10.18129/B9.bioc.PeacoQC
+  url: https://bioconductor.org/packages/PeacoQC
+- type: article
+  title: 'ConsensusClusterPlus: a class discovery tool with confidence assessments and item tracking'
+  authors:
+  - family-names: Wilkerson
+    given-names: Matthew D.
+  - family-names: Hayes
+    given-names: D. Neil
+  year: 2010
+  journal: Bioinformatics
+  volume: 26
+  issue: '12'
+  start: '1572'
+  end: '1573'
+  doi: 10.1093/bioinformatics/btq170
+- type: software
+  title: FlowSOM
+  authors:
+  - family-names: Van Gassen
+    given-names: Sofie
+  - family-names: Couckuyt
+    given-names: Artuur
+  - family-names: Quintelier
+    given-names: Katrien
+  - family-names: Emmaneel
+    given-names: Annelies
+  - family-names: Bonte
+    given-names: Sarah
+  - family-names: Fonteyn
+    given-names: Robbe
+  - family-names: Callebaut
+    given-names: Britt
+  - family-names: Saeys
+    given-names: Yvan
+  year: 2017
+  doi: 10.18129/B9.bioc.FlowSOM
+  url: https://bioconductor.org/packages/FlowSOM
+- type: article
+  title: 'UMAP: Uniform Manifold Approximation and Projection for Dimension Reduction'
+  authors:
+  - family-names: McInnes
+    given-names: Leland
+  - family-names: Healy
+    given-names: John
+  - family-names: Melville
+    given-names: James
+  year: 2018
+  url: https://arxiv.org/abs/1802.03426
+  doi: 10.48550/arXiv.1802.03426
+- type: article
+  title: 'edgeR: a Bioconductor package for differential expression analysis of digital gene expression
+    data'
+  authors:
+  - family-names: Robinson
+    given-names: Mark D.
+  - family-names: McCarthy
+    given-names: Davis J.
+  - family-names: Smyth
+    given-names: Gordon K.
+  year: 2010
+  journal: Bioinformatics
+  volume: 26
+  issue: '1'
+  start: '139'
+  end: '140'
+  doi: 10.1093/bioinformatics/btp616
+- type: article
+  title: Differential expression analysis of multifactor RNA-Seq experiments with respect to biological
+    variation
+  authors:
+  - family-names: McCarthy
+    given-names: Davis J.
+  - family-names: Chen
+    given-names: Yunshun
+  - family-names: Smyth
+    given-names: Gordon K.
+  year: 2012
+  journal: Nucleic Acids Research
+  volume: 40
+  issue: '10'
+  start: '4288'
+  end: '4297'
+  doi: 10.1093/nar/gks042
+- type: article
+  title: limma powers differential expression analyses for RNA-sequencing and microarray studies
+  authors:
+  - family-names: Ritchie
+    given-names: Matthew E.
+  - family-names: Phipson
+    given-names: Belinda
+  - family-names: Wu
+    given-names: Di
+  - family-names: Hu
+    given-names: Yifang
+  - family-names: Law
+    given-names: Charity W.
+  - family-names: Shi
+    given-names: Wei
+  - family-names: Smyth
+    given-names: Gordon K.
+  year: 2015
+  journal: Nucleic Acids Research
+  volume: 43
+  issue: '7'
+  start: e47
+  doi: 10.1093/nar/gkv007
+- type: article
+  title: 'voom: precision weights unlock linear model analysis tools for RNA-seq read counts'
+  authors:
+  - family-names: Law
+    given-names: Charity W
+  - family-names: Chen
+    given-names: Yunshun
+  - family-names: Shi
+    given-names: Wei
+  - family-names: Smyth
+    given-names: Gordon K
+  year: 2014
+  journal: Genome Biology
+  volume: 15
+  issue: '2'
+  start: R29
+  doi: 10.1186/gb-2014-15-2-r29
+- type: article
+  title: Fitting Linear Mixed-Effects Models Using lme4
+  authors:
+  - family-names: Bates
+    given-names: Douglas
+  - family-names: Mächler
+    given-names: Martin
+  - family-names: Bolker
+    given-names: Ben
+  - family-names: Walker
+    given-names: Steve
+  year: 2015
+  journal: Journal of Statistical Software
+  volume: 67
+  issue: '1'
+  doi: 10.18637/jss.v067.i01
+- type: article
+  title: Simultaneous Inference in General Parametric Models
+  authors:
+  - family-names: Hothorn
+    given-names: Torsten
+  - family-names: Bretz
+    given-names: Frank
+  - family-names: Westfall
+    given-names: Peter
+  year: 2008
+  journal: Biometrical Journal
+  volume: 50
+  issue: '3'
+  start: '346'
+  end: '363'
+  doi: 10.1002/bimj.200810425
+- type: software
+  title: diffcyt
+  authors:
+  - family-names: Weber
+    given-names: Lukas M.
+  year: 2018
+  doi: 10.18129/B9.bioc.diffcyt
+  url: https://bioconductor.org/packages/diffcyt
+- type: article
+  title: Adjusting batch effects in microarray expression data using empirical Bayes methods
+  authors:
+  - family-names: Johnson
+    given-names: W. Evan
+  - family-names: Li
+    given-names: Cheng
+  - family-names: Rabinovic
+    given-names: Ariel
+  year: 2007
+  journal: Biostatistics
+  volume: 8
+  issue: '1'
+  start: '118'
+  end: '127'
+  doi: 10.1093/biostatistics/kxj037
+- type: article
+  title: The sva package for removing batch effects and other unwanted variation in high-throughput experiments
+  authors:
+  - family-names: Leek
+    given-names: Jeffrey T.
+  - family-names: Johnson
+    given-names: W. Evan
+  - family-names: Parker
+    given-names: Hilary S.
+  - family-names: Jaffe
+    given-names: Andrew E.
+  - family-names: Storey
+    given-names: John D.
+  year: 2012
+  journal: Bioinformatics
+  volume: 28
+  issue: '6'
+  start: '882'
+  end: '883'
+  doi: 10.1093/bioinformatics/bts034
+- type: article
+  title: Flexible Self-Organizing Maps in kohonen 3.0
+  authors:
+  - family-names: Wehrens
+    given-names: Ron
+  - family-names: Kruisselbrink
+    given-names: Johannes
+  year: 2018
+  journal: Journal of Statistical Software
+  volume: 87
+  issue: '7'
+  doi: 10.18637/jss.v087.i07
+- type: article
+  title: The Earth Mover's Distance as a Metric for Image Retrieval
+  authors:
+  - family-names: Rubner
+    given-names: Yossi
+  - family-names: Tomasi
+    given-names: Carlo
+  - family-names: Guibas
+    given-names: Leonidas J.
+  year: 2000
+  journal: International Journal of Computer Vision
+  volume: 40
+  issue: '2'
+  start: '99'
+  end: '121'
+  doi: 10.1023/A:1026543900054
+- type: article
+  title: 'SciPy 1.0: fundamental algorithms for scientific computing in Python'
+  authors:
+  - family-names: Virtanen
+    given-names: Pauli
+  - family-names: Gommers
+    given-names: Ralf
+  - family-names: Oliphant
+    given-names: Travis E.
+  - family-names: Haberland
+    given-names: Matt
+  - family-names: Reddy
+    given-names: Tyler
+  - family-names: Cournapeau
+    given-names: David
+  - family-names: Burovski
+    given-names: Evgeni
+  - family-names: Peterson
+    given-names: Pearu
+  - family-names: Weckesser
+    given-names: Warren
+  - family-names: Bright
+    given-names: Jonathan
+  - family-names: van der Walt
+    given-names: Stéfan J.
+  - family-names: Brett
+    given-names: Matthew
+  - family-names: Wilson
+    given-names: Joshua
+  - family-names: Millman
+    given-names: K. Jarrod
+  - family-names: Mayorov
+    given-names: Nikolay
+  - family-names: Nelson
+    given-names: Andrew R. J.
+  - family-names: Jones
+    given-names: Eric
+  - family-names: Kern
+    given-names: Robert
+  - family-names: Larson
+    given-names: Eric
+  - family-names: Carey
+    given-names: C J
+  - family-names: Polat
+    given-names: İlhan
+  - family-names: Feng
+    given-names: Yu
+  - family-names: Moore
+    given-names: Eric W.
+  - family-names: VanderPlas
+    given-names: Jake
+  - family-names: Laxalde
+    given-names: Denis
+  - family-names: Perktold
+    given-names: Josef
+  - family-names: Cimrman
+    given-names: Robert
+  - family-names: Henriksen
+    given-names: Ian
+  - family-names: Quintero
+    given-names: E. A.
+  - family-names: Harris
+    given-names: Charles R.
+  - family-names: Archibald
+    given-names: Anne M.
+  - family-names: Ribeiro
+    given-names: Antônio H.
+  - family-names: Pedregosa
+    given-names: Fabian
+  - family-names: van Mulbregt
+    given-names: Paul
+  - name: SciPy 1.0 Contributors
+  - family-names: Vijaykumar
+    given-names: Aditya
+  - family-names: Bardelli
+    given-names: Alessandro Pietro
+  - family-names: Rothberg
+    given-names: Alex
+  - family-names: Hilboll
+    given-names: Andreas
+  - family-names: Kloeckner
+    given-names: Andreas
+  - family-names: Scopatz
+    given-names: Anthony
+  - family-names: Lee
+    given-names: Antony
+  - family-names: Rokem
+    given-names: Ariel
+  - family-names: Woods
+    given-names: C. Nathan
+  - family-names: Fulton
+    given-names: Chad
+  - family-names: Masson
+    given-names: Charles
+  - family-names: Häggström
+    given-names: Christian
+  - family-names: Fitzgerald
+    given-names: Clark
+  - family-names: Nicholson
+    given-names: David A.
+  - family-names: Hagen
+    given-names: David R.
+  - family-names: Pasechnik
+    given-names: Dmitrii V.
+  - family-names: Olivetti
+    given-names: Emanuele
+  - family-names: Martin
+    given-names: Eric
+  - family-names: Wieser
+    given-names: Eric
+  - family-names: Silva
+    given-names: Fabrice
+  - family-names: Lenders
+    given-names: Felix
+  - family-names: Wilhelm
+    given-names: Florian
+  - family-names: Young
+    given-names: G.
+  - family-names: Price
+    given-names: Gavin A.
+  - family-names: Ingold
+    given-names: Gert-Ludwig
+  - family-names: Allen
+    given-names: Gregory E.
+  - family-names: Lee
+    given-names: Gregory R.
+  - family-names: Audren
+    given-names: Hervé
+  - family-names: Probst
+    given-names: Irvin
+  - family-names: Dietrich
+    given-names: Jörg P.
+  - family-names: Silterra
+    given-names: Jacob
+  - family-names: Webber
+    given-names: James T
+  - family-names: Slavič
+    given-names: Janko
+  - family-names: Nothman
+    given-names: Joel
+  - family-names: Buchner
+    given-names: Johannes
+  - family-names: Kulick
+    given-names: Johannes
+  - family-names: Schönberger
+    given-names: Johannes L.
+  - family-names: de Miranda Cardoso
+    given-names: José Vinícius
+  - family-names: Reimer
+    given-names: Joscha
+  - family-names: Harrington
+    given-names: Joseph
+  - family-names: Rodríguez
+    given-names: Juan Luis Cano
+  - family-names: Nunez-Iglesias
+    given-names: Juan
+  - family-names: Kuczynski
+    given-names: Justin
+  - family-names: Tritz
+    given-names: Kevin
+  - family-names: Thoma
+    given-names: Martin
+  - family-names: Newville
+    given-names: Matthew
+  - family-names: Kümmerer
+    given-names: Matthias
+  - family-names: Bolingbroke
+    given-names: Maximilian
+  - family-names: Tartre
+    given-names: Michael
+  - family-names: Pak
+    given-names: Mikhail
+  - family-names: Smith
+    given-names: Nathaniel J.
+  - family-names: Nowaczyk
+    given-names: Nikolai
+  - family-names: Shebanov
+    given-names: Nikolay
+  - family-names: Pavlyk
+    given-names: Oleksandr
+  - family-names: Brodtkorb
+    given-names: Per A.
+  - family-names: Lee
+    given-names: Perry
+  - family-names: McGibbon
+    given-names: Robert T.
+  - family-names: Feldbauer
+    given-names: Roman
+  - family-names: Lewis
+    given-names: Sam
+  - family-names: Tygier
+    given-names: Sam
+  - family-names: Sievert
+    given-names: Scott
+  - family-names: Vigna
+    given-names: Sebastiano
+  - family-names: Peterson
+    given-names: Stefan
+  - family-names: More
+    given-names: Surhud
+  - family-names: Pudlik
+    given-names: Tadeusz
+  - family-names: Oshima
+    given-names: Takuya
+  - family-names: Pingel
+    given-names: Thomas J.
+  - family-names: Robitaille
+    given-names: Thomas P.
+  - family-names: Spura
+    given-names: Thomas
+  - family-names: Jones
+    given-names: Thouis R.
+  - family-names: Cera
+    given-names: Tim
+  - family-names: Leslie
+    given-names: Tim
+  - family-names: Zito
+    given-names: Tiziano
+  - family-names: Krauss
+    given-names: Tom
+  - family-names: Upadhyay
+    given-names: Utkarsh
+  - family-names: Halchenko
+    given-names: Yaroslav O.
+  - family-names: Vázquez-Baeza
+    given-names: Yoshiki
+  year: 2020
+  journal: Nature Methods
+  volume: 17
+  issue: '3'
+  start: '261'
+  end: '272'
+  doi: 10.1038/s41592-019-0686-2
+- type: article
+  title: 'Matplotlib: A 2D Graphics Environment'
+  authors:
+  - family-names: Hunter
+    given-names: John D.
+  year: 2007
+  journal: Computing in Science & Engineering
+  volume: 9
+  issue: '3'
+  start: '90'
+  end: '95'
+  doi: 10.1109/MCSE.2007.55
