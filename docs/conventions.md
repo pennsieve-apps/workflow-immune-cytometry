@@ -74,6 +74,17 @@ CD69, PFN, HLADR, CD25, PD1, CD39, TIGIT. CD45 is neither. `Time` is kept as acq
 writes `$PnR=129` for Time while values reach ~1e6, and flowCore's `read.FCS` truncates
 at `$PnR` by default, so read raw demo files with `truncate_max_range = FALSE`.
 
+### Pre-gating raw mass cytometry (`fcs-prep` ≥ 0.1.2)
+
+Raw CyTOF files still contain normalisation beads, debris and dead cells. With `PREGATE=auto`
+(default), `fcs-prep` gates them out before anything else when the panel has bead, DNA or
+viability channels: beads out (140Ce etc.), DNA⁺ events on Ir191/Ir193 (doublets are left for
+`cleanet`), live cells on the viability channel. Thresholds come from each file's own density
+(valleys between modes, with floors and caps); per-sample counts are in `metadata/gating.csv`,
+plots in `metadata/gates/`, and a `pregate` section in `prep.json`. Pre-gated data (no such
+channels, e.g. the spectral demo) passes through unchanged. Viability, DNA, bead, barcode and
+cisplatin channels are neither clustering nor state markers.
+
 ### Cell subsamples and tables
 
 - Tables are CSV (UTF-8, header row, `.` decimal). Long format where it is natural:
