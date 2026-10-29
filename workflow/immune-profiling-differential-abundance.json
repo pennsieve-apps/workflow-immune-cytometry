@@ -1,0 +1,341 @@
+{
+  "name": "Immune Profiling & Differential Abundance",
+  "summary": "FCS: QC, doublets, FlowSOM populations, UMAP, diffcyt DA/DS between conditions, report.",
+  "description": "High-dimensional immune profiling of flow, spectral or mass cytometry data, after the CyTOF workflow of Nowicka et al. (2017) and the FlowSOM protocol of Quintelier et al. (2021). Prepares and arcsinh-transforms the FCS files (FlowKit), removes acquisition anomalies (PeacoQC) and doublets (Cleanet), clusters cells with FlowSOM and labels the metaclusters from a marker table, embeds a subsample with UMAP, tests differential abundance and differential state between conditions with diffcyt (batch as a covariate), and writes an HTML report with tables.",
+  "inputs": [
+    {
+      "id": "fcs",
+      "name": "FCS files",
+      "description": "FCS files (flow, spectral or mass cytometry), one per sample, plus an optional samples.csv sample sheet (file, sample_id, batch, condition, ...).",
+      "position": {
+        "x": 40,
+        "y": 300
+      }
+    }
+  ],
+  "processors": [
+    {
+      "id": "prep",
+      "type": "processor",
+      "sourceUrl": "https://github.com/pennsieve-apps/processor-fcs-prep",
+      "tag": "v0.1.0",
+      "dependsOn": [
+        "fcs"
+      ],
+      "position": {
+        "x": 300,
+        "y": 300
+      },
+      "cpu": "2048",
+      "memory": "4096"
+    },
+    {
+      "id": "qc",
+      "type": "processor",
+      "sourceUrl": "https://github.com/pennsieve-apps/processor-peacoqc",
+      "tag": "v0.1.0",
+      "dependsOn": [
+        "prep"
+      ],
+      "position": {
+        "x": 560,
+        "y": 300
+      },
+      "cpu": "2048",
+      "memory": "8192",
+      "inputs": [
+        {
+          "from": "prep",
+          "output": "fcs",
+          "input": "fcs"
+        },
+        {
+          "from": "prep",
+          "output": "metadata",
+          "input": "metadata"
+        }
+      ]
+    },
+    {
+      "id": "doublets",
+      "type": "processor",
+      "sourceUrl": "https://github.com/pennsieve-apps/processor-cleanet",
+      "tag": "v0.1.0",
+      "dependsOn": [
+        "qc",
+        "prep"
+      ],
+      "position": {
+        "x": 820,
+        "y": 300
+      },
+      "cpu": "2048",
+      "memory": "8192",
+      "inputs": [
+        {
+          "from": "qc",
+          "output": "fcs",
+          "input": "fcs"
+        },
+        {
+          "from": "prep",
+          "output": "metadata",
+          "input": "metadata"
+        }
+      ]
+    },
+    {
+      "id": "clusters",
+      "type": "processor",
+      "sourceUrl": "https://github.com/pennsieve-apps/processor-flowsom",
+      "tag": "v0.1.0",
+      "dependsOn": [
+        "doublets",
+        "prep"
+      ],
+      "position": {
+        "x": 1080,
+        "y": 300
+      },
+      "cpu": "2048",
+      "memory": "8192",
+      "inputs": [
+        {
+          "from": "doublets",
+          "output": "fcs",
+          "input": "fcs"
+        },
+        {
+          "from": "prep",
+          "output": "metadata",
+          "input": "metadata"
+        }
+      ]
+    },
+    {
+      "id": "umap",
+      "type": "processor",
+      "sourceUrl": "https://github.com/pennsieve-apps/processor-cytometry-umap",
+      "tag": "v0.1.0",
+      "dependsOn": [
+        "clusters",
+        "prep"
+      ],
+      "position": {
+        "x": 1340,
+        "y": 170
+      },
+      "cpu": "2048",
+      "memory": "4096",
+      "inputs": [
+        {
+          "from": "clusters",
+          "output": "cells",
+          "input": "cells"
+        },
+        {
+          "from": "prep",
+          "output": "metadata",
+          "input": "metadata"
+        }
+      ]
+    },
+    {
+      "id": "diffcyt",
+      "type": "processor",
+      "sourceUrl": "https://github.com/pennsieve-apps/processor-diffcyt",
+      "tag": "v0.1.0",
+      "dependsOn": [
+        "clusters",
+        "prep"
+      ],
+      "position": {
+        "x": 1340,
+        "y": 430
+      },
+      "cpu": "1024",
+      "memory": "2048",
+      "inputs": [
+        {
+          "from": "clusters",
+          "output": "clusters",
+          "input": "clusters"
+        },
+        {
+          "from": "prep",
+          "output": "metadata",
+          "input": "metadata"
+        }
+      ],
+      "defaultParams": {
+        "CONDITION_COLUMN": "condition",
+        "REFERENCE_LEVEL": "unstimulated",
+        "BLOCK_COLUMN": "batch"
+      }
+    },
+    {
+      "id": "report",
+      "type": "processor",
+      "sourceUrl": "https://github.com/pennsieve-apps/processor-cytometry-report",
+      "tag": "v0.1.0",
+      "dependsOn": [
+        "prep",
+        "qc",
+        "doublets",
+        "clusters",
+        "umap",
+        "diffcyt"
+      ],
+      "position": {
+        "x": 1600,
+        "y": 300
+      },
+      "cpu": "1024",
+      "memory": "2048",
+      "inputs": [
+        {
+          "from": "prep",
+          "output": "metadata",
+          "input": "metadata"
+        },
+        {
+          "from": "qc",
+          "output": "qc",
+          "input": "qc"
+        },
+        {
+          "from": "doublets",
+          "output": "qc",
+          "input": "doublets"
+        },
+        {
+          "from": "clusters",
+          "output": "clusters",
+          "input": "clusters"
+        },
+        {
+          "from": "umap",
+          "output": "embedding",
+          "input": "embedding"
+        },
+        {
+          "from": "diffcyt",
+          "output": "da",
+          "input": "da"
+        },
+        {
+          "from": "diffcyt",
+          "output": "ds",
+          "input": "ds"
+        }
+      ],
+      "defaultParams": {
+        "REPORT_TITLE": "Immune Profiling & Differential Abundance"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "id": "report_out",
+      "name": "Report",
+      "from": {
+        "step": "report",
+        "output": "report"
+      },
+      "position": {
+        "x": 1860,
+        "y": 170
+      },
+      "default": {
+        "targetType": "Pennsieve Dataset",
+        "params": {
+          "TARGET_FOLDER": "derivatives/immune-profiling/report"
+        }
+      }
+    },
+    {
+      "id": "tables_out",
+      "name": "Tables",
+      "from": {
+        "step": "report",
+        "output": "tables"
+      },
+      "position": {
+        "x": 1860,
+        "y": 300
+      },
+      "default": {
+        "targetType": "Pennsieve Dataset",
+        "params": {
+          "TARGET_FOLDER": "derivatives/immune-profiling/tables"
+        }
+      }
+    },
+    {
+      "id": "clusters_out",
+      "name": "FlowSOM clusters",
+      "from": {
+        "step": "clusters",
+        "output": "clusters"
+      },
+      "position": {
+        "x": 1860,
+        "y": 430
+      },
+      "default": {
+        "targetType": "Pennsieve Dataset",
+        "params": {
+          "TARGET_FOLDER": "derivatives/immune-profiling/flowsom"
+        }
+      }
+    },
+    {
+      "id": "da_out",
+      "name": "Differential abundance",
+      "from": {
+        "step": "diffcyt",
+        "output": "da"
+      },
+      "position": {
+        "x": 1860,
+        "y": 560
+      },
+      "default": {
+        "targetType": "Pennsieve Dataset",
+        "params": {
+          "TARGET_FOLDER": "derivatives/immune-profiling/diffcyt-da"
+        }
+      }
+    },
+    {
+      "id": "ds_out",
+      "name": "Differential state",
+      "from": {
+        "step": "diffcyt",
+        "output": "ds"
+      },
+      "position": {
+        "x": 1860,
+        "y": 690
+      },
+      "default": {
+        "targetType": "Pennsieve Dataset",
+        "params": {
+          "TARGET_FOLDER": "derivatives/immune-profiling/diffcyt-ds"
+        }
+      }
+    },
+    {
+      "id": "clean_fcs_out",
+      "name": "Cleaned FCS",
+      "from": {
+        "step": "doublets",
+        "output": "fcs"
+      },
+      "position": {
+        "x": 1860,
+        "y": 820
+      }
+    }
+  ]
+}

@@ -1,0 +1,354 @@
+{
+  "name": "Multi-batch Harmonization & QC",
+  "summary": "FCS: QC, batch-effect EMD per marker, CytoNorm vs cyCombine correction, before/after report.",
+  "description": "Measures and corrects batch effects in a multi-batch cytometry cohort. Prepares and arcsinh-transforms the FCS files (FlowKit), removes acquisition anomalies (PeacoQC), scores every batch and marker by Earth Mover's Distance against a replicate control and the other batches, normalizes with CytoNorm (on the replicate control) and with cyCombine (preserving the condition), scores both corrected cohorts the same way, and writes a report comparing the methods.",
+  "inputs": [
+    {
+      "id": "fcs",
+      "name": "FCS files",
+      "description": "FCS files (flow, spectral or mass cytometry), one per sample, plus an optional samples.csv sample sheet (file, sample_id, batch, condition, ...).",
+      "position": {
+        "x": 40,
+        "y": 300
+      }
+    }
+  ],
+  "processors": [
+    {
+      "id": "prep",
+      "type": "processor",
+      "sourceUrl": "https://github.com/pennsieve-apps/processor-fcs-prep",
+      "tag": "v0.1.0",
+      "dependsOn": [
+        "fcs"
+      ],
+      "position": {
+        "x": 300,
+        "y": 300
+      },
+      "cpu": "2048",
+      "memory": "4096"
+    },
+    {
+      "id": "qc",
+      "type": "processor",
+      "sourceUrl": "https://github.com/pennsieve-apps/processor-peacoqc",
+      "tag": "v0.1.0",
+      "dependsOn": [
+        "prep"
+      ],
+      "position": {
+        "x": 560,
+        "y": 300
+      },
+      "cpu": "2048",
+      "memory": "8192",
+      "inputs": [
+        {
+          "from": "prep",
+          "output": "fcs",
+          "input": "fcs"
+        },
+        {
+          "from": "prep",
+          "output": "metadata",
+          "input": "metadata"
+        }
+      ]
+    },
+    {
+      "id": "assess-raw",
+      "type": "processor",
+      "sourceUrl": "https://github.com/pennsieve-apps/processor-cytometry-batch-assess",
+      "tag": "v0.1.0",
+      "dependsOn": [
+        "qc",
+        "prep"
+      ],
+      "position": {
+        "x": 820,
+        "y": 40
+      },
+      "cpu": "1024",
+      "memory": "2048",
+      "inputs": [
+        {
+          "from": "qc",
+          "output": "fcs",
+          "input": "fcs"
+        },
+        {
+          "from": "prep",
+          "output": "metadata",
+          "input": "metadata"
+        }
+      ],
+      "defaultParams": {
+        "LABEL": "raw",
+        "REFERENCE_COLUMN": "control",
+        "REFERENCE_VALUES": "tcu1"
+      }
+    },
+    {
+      "id": "cytonorm",
+      "type": "processor",
+      "sourceUrl": "https://github.com/pennsieve-apps/processor-cytonorm",
+      "tag": "v0.1.0",
+      "dependsOn": [
+        "qc",
+        "prep"
+      ],
+      "position": {
+        "x": 820,
+        "y": 300
+      },
+      "cpu": "2048",
+      "memory": "8192",
+      "inputs": [
+        {
+          "from": "qc",
+          "output": "fcs",
+          "input": "fcs"
+        },
+        {
+          "from": "prep",
+          "output": "metadata",
+          "input": "metadata"
+        }
+      ],
+      "defaultParams": {
+        "MODE": "controls",
+        "BATCH_COLUMN": "batch",
+        "REFERENCE_COLUMN": "control",
+        "REFERENCE_VALUES": "tcu1"
+      }
+    },
+    {
+      "id": "cycombine",
+      "type": "processor",
+      "sourceUrl": "https://github.com/pennsieve-apps/processor-cycombine",
+      "tag": "v0.1.0",
+      "dependsOn": [
+        "qc",
+        "prep"
+      ],
+      "position": {
+        "x": 820,
+        "y": 560
+      },
+      "cpu": "2048",
+      "memory": "8192",
+      "inputs": [
+        {
+          "from": "qc",
+          "output": "fcs",
+          "input": "fcs"
+        },
+        {
+          "from": "prep",
+          "output": "metadata",
+          "input": "metadata"
+        }
+      ],
+      "defaultParams": {
+        "BATCH_COLUMN": "batch",
+        "COVARIATE_COLUMN": "condition"
+      }
+    },
+    {
+      "id": "assess-cytonorm",
+      "type": "processor",
+      "sourceUrl": "https://github.com/pennsieve-apps/processor-cytometry-batch-assess",
+      "tag": "v0.1.0",
+      "dependsOn": [
+        "cytonorm",
+        "prep"
+      ],
+      "position": {
+        "x": 1080,
+        "y": 300
+      },
+      "cpu": "1024",
+      "memory": "2048",
+      "inputs": [
+        {
+          "from": "cytonorm",
+          "output": "fcs",
+          "input": "fcs"
+        },
+        {
+          "from": "prep",
+          "output": "metadata",
+          "input": "metadata"
+        }
+      ],
+      "defaultParams": {
+        "LABEL": "cytonorm",
+        "REFERENCE_COLUMN": "control",
+        "REFERENCE_VALUES": "tcu1"
+      }
+    },
+    {
+      "id": "assess-cycombine",
+      "type": "processor",
+      "sourceUrl": "https://github.com/pennsieve-apps/processor-cytometry-batch-assess",
+      "tag": "v0.1.0",
+      "dependsOn": [
+        "cycombine",
+        "prep"
+      ],
+      "position": {
+        "x": 1080,
+        "y": 560
+      },
+      "cpu": "1024",
+      "memory": "2048",
+      "inputs": [
+        {
+          "from": "cycombine",
+          "output": "fcs",
+          "input": "fcs"
+        },
+        {
+          "from": "prep",
+          "output": "metadata",
+          "input": "metadata"
+        }
+      ],
+      "defaultParams": {
+        "LABEL": "cycombine",
+        "REFERENCE_COLUMN": "control",
+        "REFERENCE_VALUES": "tcu1"
+      }
+    },
+    {
+      "id": "report",
+      "type": "processor",
+      "sourceUrl": "https://github.com/pennsieve-apps/processor-cytometry-report",
+      "tag": "v0.1.0",
+      "dependsOn": [
+        "prep",
+        "qc",
+        "assess-raw",
+        "assess-cytonorm",
+        "assess-cycombine",
+        "cytonorm",
+        "cycombine"
+      ],
+      "position": {
+        "x": 1340,
+        "y": 300
+      },
+      "cpu": "1024",
+      "memory": "2048",
+      "inputs": [
+        {
+          "from": "prep",
+          "output": "metadata",
+          "input": "metadata"
+        },
+        {
+          "from": "qc",
+          "output": "qc",
+          "input": "qc"
+        },
+        {
+          "from": "assess-raw",
+          "output": "assessment",
+          "input": "assessment"
+        },
+        {
+          "from": "assess-cytonorm",
+          "output": "assessment",
+          "input": "assessment"
+        },
+        {
+          "from": "assess-cycombine",
+          "output": "assessment",
+          "input": "assessment"
+        },
+        {
+          "from": "cytonorm",
+          "output": "qc",
+          "input": "normalization"
+        },
+        {
+          "from": "cycombine",
+          "output": "qc",
+          "input": "normalization"
+        }
+      ],
+      "defaultParams": {
+        "REPORT_TITLE": "Multi-batch Harmonization & QC"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "id": "report_out",
+      "name": "Report",
+      "from": {
+        "step": "report",
+        "output": "report"
+      },
+      "position": {
+        "x": 1600,
+        "y": 170
+      },
+      "default": {
+        "targetType": "Pennsieve Dataset",
+        "params": {
+          "TARGET_FOLDER": "derivatives/batch-harmonization/report"
+        }
+      }
+    },
+    {
+      "id": "tables_out",
+      "name": "Tables",
+      "from": {
+        "step": "report",
+        "output": "tables"
+      },
+      "position": {
+        "x": 1600,
+        "y": 300
+      },
+      "default": {
+        "targetType": "Pennsieve Dataset",
+        "params": {
+          "TARGET_FOLDER": "derivatives/batch-harmonization/tables"
+        }
+      }
+    },
+    {
+      "id": "cytonorm_fcs_out",
+      "name": "CytoNorm-normalized FCS",
+      "from": {
+        "step": "cytonorm",
+        "output": "fcs"
+      },
+      "position": {
+        "x": 1600,
+        "y": 430
+      },
+      "default": {
+        "targetType": "Pennsieve Dataset",
+        "params": {
+          "TARGET_FOLDER": "derivatives/batch-harmonization/cytonorm-fcs"
+        }
+      }
+    },
+    {
+      "id": "cycombine_fcs_out",
+      "name": "cyCombine-corrected FCS",
+      "from": {
+        "step": "cycombine",
+        "output": "fcs"
+      },
+      "position": {
+        "x": 1600,
+        "y": 560
+      }
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+data/zenodo-*/
+data/work*/
+data/run*/
+data/out*/
+*.fcs
